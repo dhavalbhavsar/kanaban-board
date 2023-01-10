@@ -18,18 +18,23 @@ class ColumnController extends Controller
      */
     public function index(Request $request)
     {
-        $columns = Column::with('cards')->whereHas('cards', function($query) use($request) {
-            $date = $request->input('date');
-            $status = $request->input('status');
+        $date = $request->input('date');
+        $status = $request->input('status');
 
-            if(!empty($date))
-                $query->where(\DB::raw('DATE(created_at)'), $date);
+        if(!empty($date) || !empty($status)) {
+            $columns = Column::with('cards')->whereHas('cards', function($query) use($date, $status) {
 
-            if(!empty($status))
-                $query->where('status', $status);
-
-        })->get();
-
+                if(!empty($date))
+                    $query->where(\DB::raw('DATE(created_at)'), $date);
+    
+                if(!empty($status))
+                    $query->where('status', $status);
+    
+            })->get();
+        } else {
+            $columns = Column::with('cards')->get();
+        }
+        
         return $this->respond('Column details successfully', $columns, Response::HTTP_OK);
     }
 
