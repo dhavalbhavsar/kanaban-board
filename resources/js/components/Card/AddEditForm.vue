@@ -8,7 +8,7 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="card-name" class="col-form-label">Card Name:</label>
+              <label for="card-name" class="col-form-label required">Card Name:</label>
               <input type="text" id="card-name" class="form-control" placeholder="Enter a card name" v-model.trim="card.name" />
               <div v-show="errorMessage">
                 <span class="text-danger">
@@ -23,7 +23,7 @@
           </div>
           <div class="modal-footer">
             <button @click="$emit('card-canceled', 'card')" type="reset" class="btn btn-secondary">
-              cancel
+              Cancel
             </button>
             <button type="submit" class="btn btn-primary" v-if="card.id === null">
               Add

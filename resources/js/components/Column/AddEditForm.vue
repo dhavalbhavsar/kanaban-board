@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Column Name:</label>
+            <label for="recipient-name" class="col-form-label required">Column Name:</label>
             <input type="text" class="form-control" placeholder="Enter a column" v-model.trim="column.name" />
             <div v-show="errorMessage">
               <span class="text-danger">
@@ -19,7 +19,7 @@
         </div>
         <div class="modal-footer">
           <button @click="$emit('column-canceled', 'column')" type="reset" class="btn btn-secondary">
-            cancel
+            Cancel
           </button>
           <button type="submit" class="btn btn-primary" v-if="column.id === null">
             Add
